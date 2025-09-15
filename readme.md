@@ -1,6 +1,6 @@
 #  My Color Picker
 
-A responsive single-page color utility app built for UI developers—especially those working outside traditional CSS environments like React Native, Flutter, or native mobile platforms.
+A single-page color utility app built for UI developers—especially those working outside traditional CSS environments like React Native, Flutter, or native mobile platforms.
 
 ---
 
