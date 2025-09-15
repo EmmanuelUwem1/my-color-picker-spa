@@ -6,7 +6,7 @@ A single-page color utility app built for UI developers—especially those worki
 
 ##  Purpose
 
-**My Color Picker** is designed to help developers quickly select, preview, and copy colors in multiple formats (HEX, RGB, HSL) without relying on browser dev tools or CSS-based workflows.
+**My Color Picker** is designed to help developers who are working outside traditional CSS environments to easily select, preview, and copy colors in multiple formats (HEX, RGB, HSL).
 
 Whether you're styling components with `StyleSheet.create` in React Native or defining theme tokens in a design system, this tool gives you a fast, visual way to explore color values and grab them instantly.
 
