@@ -1,0 +1,53 @@
+/* Base styles */
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode (default) */
+body {
+  background-color: #ffffff;
+  color: #222;
+}
+
+/* Dark mode via system preference */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #eee;
+  }
+}
+
+/* Manual override class */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #eee !important;
+}
+
+/* Container layout */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+/* Toggle button */
+#toggleMode {
+  align-self: flex-end;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#colorPickerContainer{
+    font-size: 1vw;
+}

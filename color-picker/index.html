@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Color Picker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+</head>
+<body class="bg-white text-gray-800 transition-colors duration-300 pb-20">
+  <!-- Header -->
+<header class="w-full rounded-b-full py-4 sm:py-6 bg-gradient-to-r from-[#978eff] to-[#33b5ff] text-white text-center shadow-md bg-transparent">
+  <h1 class="text-2xl sm:text-3xl font-bold tracking-wide">My color picker</h1>
+  <p class="text-xs sm:text-sm mt-1">Your sleek color playground</p>
+</header>
+
+  <!-- Main Container -->
+  <main class="max-w-screen-xl mx-auto p-6 flex flex-col gap-6 items-center">
+    <!-- Dark Mode Toggle -->
+    <button id="toggleMode" class="self-end px-4 py-2 bg-blue-600 text-white rounded-md font-semibold">
+       Toggle Mode
+    </button>
+  <div class="flex flex-col lg:flex-row items-center gap-6 w-full">
+
+
+
+    <!-- Color Preview Box -->
+   <div id="colorPreview" class="w-full h-40 sm:h-60 lg:h-80 rounded-xl shadow-md"></div>
+
+
+<div class="flex flex-col items-center justify-center gap-4">
+    <!-- Format Selector + Copy Button -->
+    <div class="flex gap-4 items-center">
+      <select title="format selector" id="formatSelector" class="px-4 py-2 border rounded-md font-semibold">
+        <option value="hex">HEX</option>
+        <option value="rgb">RGB</option>
+        <option value="hsl">HSL</option>
+      </select>
+      <button id="copyBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md font-semibold">
+         Copy Color
+      </button>
+    </div>
+
+    <!-- Color Picker -->
+<div id="colorPickerContainer" class="w-[80vw] h-[80vh] max-w-[800px] max-h-[800px] rounded-xl shadow-md flex justify-center items-center"></div>
+
+
+    </div>
+    </div>
+  </main>
+
+  <script>
+    const toggleModeBtn = document.getElementById("toggleMode");
+    const colorPreview = document.getElementById("colorPreview");
+    const formatSelector = document.getElementById("formatSelector");
+    const copyBtn = document.getElementById("copyBtn");
+
+    // Toggle dark mode
+    toggleModeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("bg-white");
+      document.body.classList.toggle("bg-gray-900");
+      document.body.classList.toggle("text-gray-800");
+      document.body.classList.toggle("text-gray-100");
+    });
+
+    // Initialize iro.js color picker
+    const colorPicker = new iro.ColorPicker("#colorPickerContainer", {
+      width: Math.min(window.innerWidth, window.innerHeight) * 0.8,
+      color: "#ff0000",
+      layoutDirection: "horizontal",
+      layout: [
+        { component: iro.ui.Box },
+        { component: iro.ui.Slider, options: { sliderType: "hue" } },
+        { component: iro.ui.Slider, options: { sliderType: "alpha" } },
+      ],
+    });
+
+    // Update preview box on color change
+    colorPicker.on("color:change", (color) => {
+      colorPreview.style.backgroundColor = color.rgbaString;
+    });
+
+    // Copy selected color in chosen format
+    copyBtn.addEventListener("click", () => {
+      const format = formatSelector.value;
+      let value = "";
+
+      switch (format) {
+        case "hex":
+          value = colorPicker.color.hexString;
+          break;
+        case "rgb":
+          value = colorPicker.color.rgbString;
+          break;
+        case "hsl":
+          value = colorPicker.color.hslString;
+          break;
+      }
+
+      navigator.clipboard.writeText(value).then(() => {
+        copyBtn.textContent = " Copied!";
+        setTimeout(() => {
+          copyBtn.textContent = " Copy Color";
+        }, 1500);
+      });
+    });
+  </script>
+</body>
+</html>
